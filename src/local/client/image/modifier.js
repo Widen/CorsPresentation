@@ -1,9 +1,18 @@
 $(function() {
-    $("#logo").on("load", function() {
+    var logo = new Image(),
+        $logo = $(logo);
+
+    $logo
+//        .attr("crossorigin", "anonymous")
+        .attr("src", "http://corspresentation-env.elasticbeanstalk.com/client/image/widen.png")
+        .prependTo($("#original"));
+
+
+    $logo.on("load", function() {
         var $canvas = $("#canvas"),
             context = $canvas[0].getContext("2d");
 
-        context.drawImage($("#logo")[0], 0, 0);
+        context.drawImage($logo[0], 0, 0);
 
         enableCaching($canvas);
         enablePainting($canvas, context);
