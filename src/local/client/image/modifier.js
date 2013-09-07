@@ -1,6 +1,5 @@
 $(function() {
-    var logo = new Image(),
-        $logo = $(logo);
+    var $logo = $("#logo");
 
     $logo
 //        .attr("crossorigin", "anonymous")
