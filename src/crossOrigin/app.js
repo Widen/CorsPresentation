@@ -1,8 +1,9 @@
 var express = require("express"),
     app = express(),
     corsHandler = function(req, res, next) {
-        //TODO target specific resources and origins
-        res.header("Access-Control-Allow-Origin", "*");
+        if (/\/widen.png$/.exec(req.path)) {
+            res.header("Access-Control-Allow-Origin", "http://localhost:8081");
+        }
 
         next();
     };
