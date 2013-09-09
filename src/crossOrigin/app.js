@@ -9,7 +9,6 @@ var express = require("express"),
     };
 
 
-app.use(express.bodyParser());
 //app.use(corsHandler);
 app.use(express.static(__dirname));
 app.listen(8081);

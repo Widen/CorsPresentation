@@ -4,6 +4,7 @@ $(function() {
     $logo
 //        .attr("crossorigin", "anonymous")
         .attr("src", "http://corspresentation-env.elasticbeanstalk.com/client/image/widen.png")
+//        .attr("src", "/proxy?source=" + encodeURIComponent("http://widen.smartimage.com/thumbnail/BROON8/960px/WidenFlat-GreyLogoTagPMS.png?ref=c6eb1a258"))
         .prependTo($("#original"));
 
 

@@ -1,6 +1,6 @@
 {
   "name" : "corsPresentationLocalServer",
   "description" : "Widen CORS presentation - local server",
-  "dependencies" : ["express"],
+  "dependencies" : ["express", "request"],
   "version" : "0.0.1"
 }
