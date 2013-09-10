@@ -14,17 +14,19 @@ $(function() {
     function vote(isUp) {
         var url = "http://corspresentation-env.elasticbeanstalk.com/vote",
             param = "?isUp=" + isUp,
-            xhr = new XMLHttpRequest;
+            transport = new XMLHttpRequest;
 
-        xhr.open("POST", url + param);
+        if (transport.withCredentials === undefined) {
+            transport = new XDomainRequest;
+        }
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                updateVotesUi(xhr.responseText);
-            }
+        transport.open("POST", url + param);
+
+        transport.onload = function() {
+            updateVotesUi(transport.responseText);
         };
 
-        xhr.send(isUp);
+        transport.send();
     }
 
 //    function getVotes() {
