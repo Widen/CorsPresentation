@@ -1,5 +1,4 @@
 $(function() {
-
     function getTime() {
         var xhr = new XMLHttpRequest;
 
@@ -18,3 +17,7 @@ $(function() {
 
     getTime();
 });
+
+//    window.setTime = function(time) {
+//        $("#time").text(time);
+//    };
