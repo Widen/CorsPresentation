@@ -1,4 +1,5 @@
-var express = require("express"),
+var votes = 0,
+    express = require("express"),
     app = express(),
     staticCorsHandler = function(req, res, next) {
         if (/\/widen.png$/.exec(req.path)) {
@@ -13,9 +14,22 @@ var express = require("express"),
 app.use(express.static(__dirname));
 app.listen(8081);
 
-app.get("/time", function(req, res) {
-    var now = new Date().toString();
+app.get("/votes", function(req, res) {
+//    res.send(votes.toString());
+    res.jsonp(votes);
+});
 
-    res.send(now);
-//    res.jsonp(now);
+app.post("/vote", function(req, res) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8081");
+
+    var isUp = req.query.isUp;
+
+    if (isUp === "true") {
+        votes++;
+    }
+    else {
+        votes--;
+    }
+
+    res.send(votes.toString());
 });
