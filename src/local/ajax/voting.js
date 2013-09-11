@@ -1,4 +1,6 @@
 $(function() {
+    var votingUrl = "http://corspresentation-env.elasticbeanstalk.com/vote";
+
     $("#upvote").click(function() {
         vote(true);
     });
@@ -11,16 +13,21 @@ $(function() {
         $("#votes").text(votes);
     }
 
-    function vote(isUp) {
-        var url = "http://corspresentation-env.elasticbeanstalk.com/vote",
-            param = "?isUp=" + isUp,
-            transport = new XMLHttpRequest;
+    function createTransport() {
+        var transport = new XMLHttpRequest;
 
         if (transport.withCredentials === undefined) {
             transport = new XDomainRequest;
         }
 
-        transport.open("POST", url + param);
+        return transport;
+    }
+
+    function sendRequest(type, params) {
+        var transport = createTransport(),
+            url = params ? votingUrl + params : votingUrl;
+
+        transport.open(type, url);
 
         transport.onload = function() {
             updateVotesUi(transport.responseText);
@@ -29,22 +36,24 @@ $(function() {
         transport.send();
     }
 
+    function vote(isUp) {
+        var param = "?isUp=" + isUp;
+
+        sendRequest("POST", param);
+    }
+
+    function enableReset() {
+        $("#reset").click(function() {
+            sendRequest("DELETE");
+        });
+    }
+
 //    function getVotes() {
-//        var url = "http://corspresentation-env.elasticbeanstalk.com/votes",
-//            xhr = new XMLHttpRequest;
-//
-//        xhr.open("GET", url);
-//
-//        xhr.onreadystatechange = function() {
-//            if (xhr.readyState === 4 && xhr.status === 200) {
-//                updateVotesUi(xhr.responseText);
-//            }
-//        };
-//
-//        xhr.send();
+//       sendRequest("GET");
 //    }
 //
 //    getVotes();
+    enableReset();
 });
 
 window.updateVotesUi = function(votes) {

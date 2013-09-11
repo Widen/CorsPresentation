@@ -18,6 +18,7 @@ var votes = 0,
 
         if (allowedOrigins.indexOf(origin) >= 0) {
             res.header("Access-Control-Allow-Origin", origin);
+            return true;
         }
     };
 
@@ -26,7 +27,7 @@ var votes = 0,
 app.use(express.static(__dirname));
 app.listen(8081);
 
-app.get("/votes", function(req, res) {
+app.get("/vote", function(req, res) {
     res.header("Cache-Control", "no-cache");
 
 //    res.send(votes.toString());
@@ -46,6 +47,22 @@ app.post("/vote", function(req, res) {
     else {
         votes--;
     }
+
+    res.send(votes.toString());
+});
+
+app.options("/vote", function(req, res) {
+    if (verifyCorsOrigin(req, res)) {
+        res.header("Access-Control-Allow-Methods", "DELETE");
+    }
+
+    res.send();
+});
+
+app.delete("/vote", function(req, res) {
+    verifyCorsOrigin(req, res);
+
+    votes = 0;
 
     res.send(votes.toString());
 });
