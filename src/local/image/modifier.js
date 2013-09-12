@@ -1,9 +1,18 @@
 $(function() {
-    var $logo = $("#logo");
+    var $logo = $("#logo"),
+        $cacheContainer = $("#cacheContainer"),
+        $cacheImg = $("#cached"),
+        $loadBtn = $("load"),
+        storageKey = "logo";
+
+    enableLoadFromCache($cacheContainer, $cacheImg, $loadBtn, storageKey);
 
     $logo
+        // CORS-enabled example
 //        .attr("crossorigin", "anonymous")
         .attr("src", "http://corspresentation-env.elasticbeanstalk.com/image/widen.png")
+
+        // proxying example
 //        .attr("src", "/proxy?source=" + encodeURIComponent("http://widen.smartimage.com/thumbnail/BROON8/960px/WidenFlat-GreyLogoTagPMS.png?ref=c6eb1a258"))
         .prependTo($("#original"));
 
@@ -14,14 +23,25 @@ $(function() {
 
         context.drawImage($logo[0], 0, 0);
 
-        enableCaching($canvas);
+        enableCaching($canvas, storageKey);
         enablePainting($canvas, context);
     });
 
-    function enableCaching($canvas) {
+    function enableLoadFromCache($container, $emptyImg, $btn, key) {
+        $btn.click(function() {
+            var imageData = localStorage.getItem(key);
+
+            if (imageData) {
+                $container.show();
+                $emptyImg.attr("src", imageData);
+            }
+        });
+    }
+
+    function enableCaching($canvas, key) {
         $("#cache").click(function() {
             var dataUrl = $canvas[0].toDataURL();
-            localStorage.setItem("logo", dataUrl);
+            localStorage.setItem(key, dataUrl);
         });
     }
 
