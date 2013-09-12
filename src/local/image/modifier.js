@@ -1,8 +1,8 @@
 $(function() {
     var $logo = $("#logo"),
-        $cacheContainer = $("#cacheContainer"),
+        $cacheContainer = $("#cachedContainer"),
         $cacheImg = $("#cached"),
-        $loadBtn = $("load"),
+        $loadBtn = $("#load"),
         storageKey = "logo";
 
     enableLoadFromCache($cacheContainer, $cacheImg, $loadBtn, storageKey);
