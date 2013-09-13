@@ -16,9 +16,9 @@ $(function() {
     function createTransport() {
         var transport = new XMLHttpRequest;
 
-        if (transport.withCredentials === undefined) {
-            transport = new XDomainRequest;
-        }
+//        if (transport.withCredentials === undefined) {
+//            transport = new XDomainRequest;
+//        }
 
         return transport;
     }
@@ -48,15 +48,15 @@ $(function() {
         });
     }
 
-//    function getVotes() {
-//       sendRequest("GET");
-//    }
-//
-//    getVotes();
+    function getVotes() {
+       sendRequest("GET");
+    }
+
+    getVotes();
     enableReset();
 });
 
-window.updateVotesUi = function(votes) {
-    $("#votes").text(votes);
-};
+//window.updateVotesUi = function(votes) {
+//    $("#votes").text(votes);
+//};
 

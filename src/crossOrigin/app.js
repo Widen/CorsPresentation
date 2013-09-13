@@ -30,12 +30,12 @@ app.listen(8081);
 app.get("/vote", function(req, res) {
     res.header("Cache-Control", "no-cache");
 
-//    res.send(votes.toString());
-    res.jsonp(votes);
+    res.send(votes.toString());
+//    res.jsonp(votes);
 });
 
 app.post("/vote", function(req, res) {
-    verifyCorsOrigin(req, res);
+//    verifyCorsOrigin(req, res);
     res.header("Content-Type", "text/plain");
     res.header("Cache-Control", "no-cache");  //IE8 XDR will cache POSTs
 
@@ -51,13 +51,13 @@ app.post("/vote", function(req, res) {
     res.send(votes.toString());
 });
 
-app.options("/vote", function(req, res) {
-    if (verifyCorsOrigin(req, res)) {
-        res.header("Access-Control-Allow-Methods", "DELETE");
-    }
-
-    res.send();
-});
+//app.options("/vote", function(req, res) {
+//    if (verifyCorsOrigin(req, res)) {
+//        res.header("Access-Control-Allow-Methods", "DELETE");
+//    }
+//
+//    res.send();
+//});
 
 app.delete("/vote", function(req, res) {
     verifyCorsOrigin(req, res);
