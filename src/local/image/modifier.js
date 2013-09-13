@@ -9,7 +9,7 @@ $(function() {
 
     $logo
         // CORS-enabled example
-//        .attr("crossorigin", "anonymous")
+//        .attr("crossorigin", "")
         .attr("src", "http://corspresentation-env.elasticbeanstalk.com/image/widen.png")
 
         // proxying example
